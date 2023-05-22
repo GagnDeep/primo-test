@@ -3,7 +3,7 @@ import ClassMangler from './class-mangler';
 
 /** @type {import('vite').UserConfig} */
 const config = {
-	plugins: [
+  plugins: [
     sveltekit(),
     // ClassMangler({
     //   // dev: true
@@ -22,20 +22,30 @@ const config = {
       apply: 'build', // or 'serve'
     }
   ],
-	test: {
-		include: ['src/**/*.{test,spec}.{js,ts}']
-	},
-	server: {
+  test: {
+    include: ['src/**/*.{test,spec}.{js,ts}']
+  },
+  server: {
     fs: {
       // throws an error without this when importing Fira font
       allow: ['..', 'node_modules/@fontsource/fira-code']
     },
     // port: 5174,
-    // headers: {
-    //   'Access-Control-Allow-Origin': '*',
-    //   'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
-    //   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    // }
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    },
+    port: 4432
+  },
+  preview: {
+    cors: true,
+    port: 4433,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    }
   },
   define: {
     '__SERVER_VERSION__': JSON.stringify(process.env.npm_package_version),
